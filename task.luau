@@ -84,3 +84,5 @@ end
 -- for i = 1, 10 do
 --     render_task:give_task(myveryexpensivetask)
 -- end
+
+return Task
