@@ -58,6 +58,7 @@ function Task:create_thread()
             current_task()
         end
     end)
+    coroutine.resume(self.thread)
 end
 
 function Task:create_heartbeat_task(func)
