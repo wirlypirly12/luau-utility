@@ -32,6 +32,7 @@ function Promise.new(executor)
         if not ok then
             reject(err)
         end
+        self.task:close()
     end)
     if state == false then
         error("promise creation failed (failed to give task)", 1)
@@ -57,6 +58,15 @@ function Promise:andThen(callback)
     elseif self._state == "pending" then
         table.insert(self._then, callback)
     end
+
+
+    -- im lazy.. ok?
+    local promise = self
+    local methods = {}
+    function methods:catch(callback)
+        return promise:catch(callback)
+    end
+    return methods
 end
 
 function Promise:catch(callback)
