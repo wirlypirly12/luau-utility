@@ -59,14 +59,8 @@ function Promise:andThen(callback)
         table.insert(self._then, callback)
     end
 
-
-    -- im lazy.. ok?
-    local promise = self
-    local methods = {}
-    function methods:catch(callback)
-        return promise:catch(callback)
-    end
-    return methods
+    -- allow statemeent chaining
+    return self
 end
 
 function Promise:catch(callback)
@@ -75,6 +69,9 @@ function Promise:catch(callback)
     elseif self._state == "pending" then
         table.insert(self._catch, callback)
     end
+
+    -- allow statemeent chaining
+    return self
 end
 
 
